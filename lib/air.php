@@ -220,7 +220,6 @@ class Air {
 		// Load form and libraries
 		require ( AIR_PATH . '/lib/air-form.php' );
 		require ( AIR_PATH . '/lib/air-meta.php' );
-		
 	}
 
 	/**

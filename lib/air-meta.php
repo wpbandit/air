@@ -95,7 +95,7 @@ class AirMeta extends AirBase {
 						$context, $priority, $args);
 				}
 				// Multiple pages
-				elseif (is_array($page)) {
+				elseif ( is_array($page) ) {
 					foreach($page as $post_type) {
 						add_meta_box($id, $title, $callback, $post_type,
 							$context, $priority, $args);
