@@ -32,7 +32,7 @@ class AirMeta extends AirBase {
 	**/
 	static function init() {
 		// Load and process meta configuration files
-		foreach ( AirControl::get('meta-files') as $file ) {
+		foreach ( Air::get('meta-files') as $file ) {
 			// Unset fields
 			if ( isset($fields) ) unset($fields);
 

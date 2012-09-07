@@ -394,13 +394,13 @@ class AirSettings extends AirBase {
 	static function set_default_options() {
 		// Set theme name and version
 		$defaults = array(
-			'theme-name' 	=> AirControl::get('theme-name'),
-			'theme-version' => AirControl::get('theme-version')
+			'theme-name' 	=> Air::get('theme-name'),
+			'theme-version' => Air::get('theme-version')
 		);
 		// Set empty fields array
 		$fields = array();
 		// Loop through options menu
-		foreach ( AirControl::get_options_menu() as $key=>$value ) {
+		foreach ( Air::get_options_menu() as $key=>$value ) {
 			// Define settings file
 			$file = AIR_PATH .'/theme/config/' . 'settings-'.$key.'.php';
 			// Load settings file
@@ -420,6 +420,6 @@ class AirSettings extends AirBase {
 			}
 		}
 		// Save default options to database
-		update_option(AirControl::get('theme-options'),$defaults);
+		update_option(Air::get('theme-options'),$defaults);
 	}
 }

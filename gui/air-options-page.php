@@ -33,7 +33,7 @@
 						<?php if( 'changelog' !== $section): ?>
 							<?php settings_fields('air-settings'); ?>
 							<?php do_settings_sections('air-'.$section); ?>		
-							<input type="hidden" name="<?php echo AirControl::get('theme-options'); ?>[section]" value="<?php echo $section; ?>">
+							<input type="hidden" name="<?php echo Air::get('theme-options'); ?>[section]" value="<?php echo $section; ?>">
 						<?php else: ?>
 							<pre><?php require ( get_template_directory().'/changelog.txt' ); ?></pre>
 						<?php endif; ?>
@@ -43,7 +43,7 @@
 			
 				<div id="air-footer">
 					<p class="submit air-submit">
-						<input type="submit" name="<?php echo AirControl::get('theme-options'); ?>[reset]" class="button-secondary" value="Reset Options" />
+						<input type="submit" name="<?php echo Air::get('theme-options'); ?>[reset]" class="button-secondary" value="Reset Options" />
 						<input type="submit" class="button-primary" value="Save Changes" />
 					</p>
 				</div><!--/air-footer-->

@@ -1,5 +1,9 @@
 <?php
 
+/*---------------------------------------------------------------------------*/
+/* WPBandit :: Air Framework Functions
+/*---------------------------------------------------------------------------*/
+
 /**
 	Compiles an array of HTML attributes into an attribute string
 **/
@@ -17,7 +21,7 @@ function air_attrs(array $attrs) {
 	- Displays framework name and version
 **/
 function air_framework_version() {
-	echo Air::TEXT_Name.' '.Air::TEXT_Version;
+	echo Air::TEXT_Name . ' ' . Air::TEXT_Version;
 }
 
 /**
@@ -25,7 +29,85 @@ function air_framework_version() {
 	- Displays theme name and version
 **/
 function air_theme_version() {
-	echo AirControl::get('theme-name').' '.AirControl::get('theme-version');
+	echo Air::get('theme-name') . ' ' . Air::get('theme-version');
+}
+
+/**
+	Admin bar menu
+	- Action : admin_bar_menu
+	- Adds items to admin bar menu
+**/
+function air_admin_bar_menu($admin_bar) {
+	if (!is_super_admin() || !is_admin_bar_showing())  
+        return;
+
+	// Theme name menu item
+	$admin_bar->add_node(
+		array(
+			'id'	=> 'wpbandit',
+			'title'	=> '<span class="ab-icon"></span>'.
+				'<span class="ab-label">'.Air::get('theme-name').'</span>',
+			'href'	=> admin_url('/admin.php?page=theme-options')
+		)
+	);
+
+	// Theme options submenu item
+	$admin_bar->add_node(
+		array(
+			'id'		=> 'wpbandit-options',
+			'title'		=> 'Theme Options',
+			'href'		=> admin_url('/admin.php?page=theme-options'),
+			'parent'	=> 'wpbandit'
+		)
+	);
+
+	// Theme modules submenu item
+	$admin_bar->add_node(
+		array(
+			'id'		=> 'wpbandit-modules',
+			'title'		=> 'Theme Modules',
+			'href'		=> admin_url('/admin.php?page=theme-modules'),
+			'parent'	=> 'wpbandit'
+		)
+	);
+}
+
+/**
+	Admin bar
+	- Action: admin_head
+	- Adds CSS to support icon in admin bar
+	- Adds CSS to move admin bar to bottom of page
+**/
+function air_admin_bar() {
+	// Do not display if admin bar not showing
+	if ( !is_admin_bar_showing() )
+		return;
+
+	// Start style output
+	$output = '<style>';
+ 
+	// Move admin bar to bottom
+	if ( Air::get('admin-bar-bottom') && !is_admin() )
+		$output .= '
+* html body { margin-top: 0 !important; }
+body.admin-bar { margin-top: -28px; padding-bottom: 28px; }
+body.wp-admin #footer { padding-bottom: 28px; }
+#wpadminbar { top: auto !important; bottom: 0; }
+#wpadminbar .quicklinks .ab-sub-wrapper { bottom: 28px; }
+#wpadminbar .quicklinks .ab-sub-wrapper ul .ab-sub-wrapper { bottom: -7px; }
+';
+
+	// Set admin bar icon style
+	$output .= '
+#wpadminbar #wp-admin-bar-wpbandit .ab-icon { background: url(' . AIR_ASSETS . '/img/adminbar-icon.png); }
+#wpadminbar #wp-admin-bar-wpbandit.menupop.hover .ab-icon { background-position: 0 -16px; }
+';
+ 
+	// End style output
+	$output .= '</style>'."\n";
+ 
+	// Print styles
+	echo $output;
 }
 
 /**
@@ -33,7 +115,7 @@ function air_theme_version() {
 	- Displays theme options menu
 **/
 function air_theme_options_menu() {
-	$menu = AirControl::get_options_menu();
+	$menu = Air::get_options_menu();
 	if( $menu ) {
 		// Set current item
 		$current = isset($_GET['section'])?esc_attr($_GET['section']):key($menu);
@@ -59,7 +141,7 @@ function air_theme_options_menu() {
 	- Displays modules menu
 **/
 function air_theme_modules_menu() {
-	$menu = AirControl::get_modules();
+	$menu = Air::get_modules();
 	if( $menu ) {
 		// Set current item
 		$current = isset($_GET['module'])?esc_attr($_GET['module']):key($menu);

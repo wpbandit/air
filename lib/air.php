@@ -12,16 +12,16 @@
 	Jermaine Maree
 
 		@package Air
-		@version 1.1
+		@version 1.2
 **/
 
-//! Base structure
-class AirBase {
+//! Air Framework
+class Air {
 
 	//@{ Framework details
 	const
 		TEXT_Name = 'Air Framework',
-		TEXT_Version = '1.1';
+		TEXT_Version = '1.2';
 	//@}
 	
 	//@{ Global variables
@@ -37,19 +37,6 @@ class AirBase {
 		//! Theme modules
 		$modules;
 	//@}
-
-}
-
-//! Framework controller
-class AirControl extends AirBase {
-
-	/**
-		Get configuration option
-			@public
-	**/
-	static function get($key,$default=FALSE) {
-		return isset(self::$config[$key])?self::$config[$key]:$default;
-	}
 
 	/**
 		Set configuration option
@@ -74,6 +61,14 @@ class AirControl extends AirBase {
 	}
 
 	/**
+		Get configuration option
+			@public
+	**/
+	static function get($key,$default=FALSE) {
+		return isset(self::$config[$key])?self::$config[$key]:$default;
+	}
+
+	/**
 		Get theme option
 			@public
 	**/
@@ -82,15 +77,6 @@ class AirControl extends AirBase {
 			return self::$options[$key];
 		else
 			return $default;
-	}
-
-	/**
-		Load framework file
-			@public
-	**/
-	static function load_file($file) {
-		if ( is_file($file) )
-			require ( $file );
 	}
 
 	/**
@@ -125,7 +111,7 @@ class AirControl extends AirBase {
 		return isset(self::$modules)?self::$modules:FALSE;
 	}
 
-	/**
+/**
 		Set default options
 			@public
 	**/
@@ -139,20 +125,24 @@ class AirControl extends AirBase {
 		// Set default options
 		AirSettings::set_default_options();
 	}
-}
 
-//! Air Framework
-class Air extends AirBase {
-	
 	/**
-		Initialize framework
+		Bootstrap code
 			@public
 	**/
-	function init() {
+	static function start() {
+		// Prohibit multiple calls
+		if ( self::$vars )
+			return;
 
-		// Load framework files
-		require ( AIR_PATH . '/lib/air-actions.php' );
-		require ( AIR_PATH . '/lib/air-functions.php' );
+		// Define framework constants
+		define ( 'AIR_PATH',	get_template_directory() . '/air/base' );
+		define ( 'AIR_THEME',	get_template_directory() . '/air/theme' );
+		define ( 'AIR_MODULES',	get_template_directory() . '/air/modules' );
+		define ( 'AIR_WIDGETS',	get_template_directory() . '/widgets' );
+
+		define ( 'AIR_URL',		get_template_directory_uri() . '/air/base' );
+		define ( 'AIR_ASSETS',	AIR_URL . '/assets' );
 
 		// Global $pagenow variable
 		global $pagenow;
@@ -169,51 +159,52 @@ class Air extends AirBase {
 			// Static front page
 			'STATIC' => ('page' === get_option('show_on_front'))?TRUE:FALSE,
 		);
+	}
 
-		// Theme options name
-		if ( !isset(self::$config['theme-options']) ) {
+	/**
+		Process framework configuration
+			@public
+	**/
+	function run() {
+		// Load framework functions
+		require ( AIR_PATH . '/lib/air-functions.php' );
+
+		// Set theme options name
+		if ( !isset(self::$config['theme-options']) )
 			self::$config['theme-options'] = 'air-options';
-		}
+
+		// Get theme options
+		self::$options = get_option(self::$config['theme-options']);
 
 		// Admin library
-		if ( is_admin() ) {
-			$air_admin = require ( AIR_PATH . '/lib/air-admin.php' ); 
-		}
+		if ( is_admin() )
+			require ( AIR_PATH . '/lib/air-admin.php' );
 
-		// Admin bar menu
-		add_action('admin_bar_menu', 'air_admin_bar_menu', 100);
-
-		// Load modules
-		if ( is_array(self::$modules) ) {
+		// Load Air modules
+		if ( self::get_modules() ) {
 			foreach ( self::$modules as $key=>$module ) {
 				require ( AIR_MODULES . '/' . $key . '/' . $key.'.php' );
 			}
 		}
 
-		// Get theme options
-		self::$options = get_option(self::$config['theme-options']);
-
 		// Add metadata (custom fields)
-		if ( is_admin() && AirControl::get('meta-files') ) {
+		if ( is_admin() && isset(self::$config['meta-files']) )
 			$this->metadata();
-		}
-		
-		// Register sidebars
-		$this->register_sidebars();
 
-		// Widgets
-		$this->widgets();
-
-		// Theme actions
-		$this->actions();
+		// Setup theme
+		add_action('widgets_init', array($this, 'register_widgets'));
+		add_action('widgets_init', array($this, 'register_sidebars'));
+		add_action('after_setup_theme', array($this, 'action_setup_theme'));
+		add_action('wp_enqueue_scripts', array($this, 'action_register_styles'));
+		add_action('wp_enqueue_scripts', array($this, 'action_register_scripts'));
 
 		// Load theme-specific functions
-		AirControl::load_file( AIR_PATH . '/theme/theme.php' );
+		if ( is_file( AIR_THEME . '/theme.php' ) )
+			require ( AIR_THEME . '/theme.php' );
 
 		// Load custom-functions.php
-		if ( is_file(get_template_directory().'/custom-functions.php') ) {
-			require ( get_template_directory().'/custom-functions.php' );
-		}
+		if ( is_file( get_template_directory() . '/custom-functions.php' ) )
+			require ( get_template_directory() . '/custom-functions.php' );
 	}
 
 	/**
@@ -233,55 +224,42 @@ class Air extends AirBase {
 	}
 
 	/**
-		Register sidebars
-			@private
-	**/
-	private function register_sidebars() {
-		$sidebars = AirControl::get('sidebars');
-		if ( $sidebars ) {
-			foreach($sidebars as $sidebar) {
-				// Single Sidebar
-				if ( !isset($sidebar['count']) ) {
-					register_sidebar($sidebar);
-				}
-				// Multiple Sidebars
-				if ( isset($sidebar['count']) ) {
-					$count = $sidebar['count'];
-					unset($sidebar['count']);
-					register_sidebars($count,$sidebar);
-				}
-			}
-		}
-	}
-
-	/**
 		Widgets
-			@private
+			@public
 	**/
-	private function widgets() {
-		$widgets = AirControl::get('widgets');
-		$widget_path = get_template_directory().'/widgets/';
-		if ( $widgets ) {
-			foreach ( $widgets as $name=>$class ) {
-				if ( is_file($widget_path.$name.'.php') ) {
-					require ( $widget_path.$name.'.php' );
-					$function = 'return register_widget("'. $class .'");';
-					add_action('widgets_init',create_function('',$function));
-				}
-			}
+	function register_widgets() {
+		if ( !self::$config['widgets'] )
+			return;
+
+		// Loop through widgets
+		foreach ( $widgets as $name=>$class ) {
+			require ( AIR_WIDGETS . '/' . $name . '.php' );
+			register_widget($class);
 		}
 	}
 
 	/**
-		Theme actions
-			@private
+		Register sidebars
+			@public
 	**/
-	private function actions() {
-		// Setup theme : Text Domain, Features, Image Sizes
-		add_action('after_setup_theme', array($this, 'action_setup_theme'));
-		// Register styles and scripts
-		add_action('wp_enqueue_scripts',
-			array($this, 'action_register_styles_and_scripts'));
+	function register_sidebars() {
+		// Are sidebars configured ?
+		if ( !self::$config['sidebars'] || !is_array(self::$config['sidebars']) )
+			return;
+
+		// Loop through sidebars
+		foreach ( self::$config['sidebars'] as $sidebar) {
+			// Single Sidebar
+			if ( !isset($sidebar['count']) ) {
+				register_sidebar($sidebar);
+			}
+			// Multiple Sidebars
+			if ( isset($sidebar['count']) ) {
+				$count = $sidebar['count'];
+				unset($sidebar['count']);
+				register_sidebars($count,$sidebar);
+			}
+		}
 	}
 
 	/**
@@ -289,33 +267,90 @@ class Air extends AirBase {
 			@public
 	**/
 	function action_setup_theme() {
-		// Text domain
+		// Theme text domain
 		if ( isset(self::$config['text-domain']) )
-			air_text_domain(self::$config['text-domain']);
+			load_theme_textdomain(self::$config['text-domain'], get_template_directory().'/languages');
+
 		// Register nav menus
 		if ( isset(self::$config['nav-menus']) )
-			air_register_nav_menus(self::$config['nav-menus']);
+			register_nav_menus(self::$config['nav-menus']);
+
 		// Theme features
-		if ( isset(self::$config['features']) )
-			air_theme_features(self::$config['features']);
+		if ( isset(self::$config['features']) ) {
+			foreach ( self::$config['features'] as $key=>$value ) {
+				if ( $value && is_bool($value) ) {
+					add_theme_support($key);
+				} elseif ( $value && is_array($value) ) {
+					add_theme_support($key, $value);
+				}
+			}
+		}
+
 		// Image sizes
 		if ( isset(self::$config['features']['post-thumbnails']) &&
-				isset(self::$config['image-sizes']) )
-			air_image_sizes(self::$config['image-sizes']);
+				isset(self::$config['image-sizes']) ) {
+			foreach ( self::$config['image-sizes'] as $size ) {
+				// Set crop attribute
+				if ( !isset($size['crop']) )
+					$size['crop'] = FALSE;
+				extract($size);
+				add_image_size($name,$width,$height,$crop);
+			}
+		}
 	}
 
 	/**
-		Register styles and scripts
+		Register styles
 			@public
 	**/
-	function action_register_styles_and_scripts() {
-		// Styles
-		if ( isset(self::$config['styles']) )
-			air_register_styles(self::$config['styles']);
-		// Scripts
-		if ( isset(self::$config['scripts']) )
-			air_register_scripts(self::$config['scripts']);
+	function action_register_styles() {
+		if ( !isset(self::$config['styles']) )
+			return;
+
+		// Defaults
+		$defaults = array(
+			'deps'		=> FALSE,
+			'ver'		=> '1.0',
+			'media'		=> 'all'
+		);
+
+		// Loop through styles and register
+		foreach ( self::$config['styles'] as $style ) {
+			// Parse $style and merge with $defaults
+			extract(wp_parse_args($style,$defaults));
+			// Register style
+			wp_register_style($handle,$src,$deps,$ver,$media);
+		}
 	}
+
+	/**
+		Register scripts
+			@public
+	**/
+	function action_register_scripts() {
+		if ( isset(self::$config['scripts']) )
+			return;
+
+		// Defaults
+		$defaults = array(
+			'deps'		=> FALSE,
+			'ver'		=> '1.0',
+			'footer'	=> FALSE
+		);
+
+		// Loop through scripts and register
+		foreach ( self::$config['scripts'] as $script ) {
+			// Parse $script and merge with $defaults
+			extract(wp_parse_args($script,$defaults));
+			// Register script
+			wp_register_script($handle,$src,$deps,$ver,$footer);
+		}
+	}
+
+}
+
+//! Framework instance
+class AirInstance {
 
 	/**
 		Class constructor
@@ -323,16 +358,11 @@ class Air extends AirBase {
 			@public
 	**/
 	function __construct($boot=FALSE) {
-		if ( !$boot ) { return; }
-
-		// Define Air Framework constants
-		define ( 'AIR_PATH', get_template_directory() . '/air' );
-		define ( 'AIR_URL', get_template_directory_uri() . '/air' );
-		define ( 'AIR_ASSETS', AIR_URL . '/assets' );
-		define ( 'AIR_MODULES', AIR_PATH . '/modules' );
+		if ( $boot )
+			Air::start();
 	}
 
 }
 
 //! Bootstrap framework
-return new Air(TRUE);
+return new AirInstance(TRUE);

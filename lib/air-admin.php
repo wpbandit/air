@@ -15,7 +15,7 @@
 		@version 1.1
 **/
 
-class AirAdmin extends AirBase {
+class AirAdmin extends Air {
 
 	protected
 		$hooks;
@@ -120,7 +120,7 @@ class AirAdmin extends AirBase {
 	**/
 	function admin_menu() {
 		// Set page and menu title
-		$title = AirControl::get('theme-name','Air Framework');
+		$title = Air::get('theme-name','Air Framework');
 		$icon_url = AIR_ASSETS . '/img/wpbandit.png';
 
 		// Create top-level menu
@@ -141,7 +141,7 @@ class AirAdmin extends AirBase {
 	**/
 	function options_page() {
 		// Set menu
-		$menu = AirControl::get_options_menu();
+		$menu = Air::get_options_menu();
 		// Set section
 		$section = isset($_GET['section'])?$_GET['section']:key($menu);
 		// Load options page
@@ -154,7 +154,7 @@ class AirAdmin extends AirBase {
 	**/
 	function modules_page() {
 		// Set menu
-		$menu = AirControl::get_modules();
+		$menu = Air::get_modules();
 		// Set module
 		$module = isset($_GET['module'])?$_GET['module']:key($menu);
 		// Load modules page
@@ -176,11 +176,11 @@ class AirAdmin extends AirBase {
 	**/
 	function theme_settings() {
 		// Set menu
-		$menu = AirControl::get_options_menu();
+		$menu = Air::get_options_menu();
 		// Set section
 		$section = isset($_GET['section'])?$_GET['section']:key($menu);
 		// Set option name
-		AirSettings::set_option_name(AirControl::get('theme-options'));
+		AirSettings::set_option_name(Air::get('theme-options'));
 		// Define settings file
 		$settings_file = AIR_PATH . '/theme/config/settings-'.$section.'.php';
 		// Load settings file, if exists
@@ -201,7 +201,7 @@ class AirAdmin extends AirBase {
 	**/
 	function module_settings() {
 		// Set menu
-		$menu = AirControl::get_modules();
+		$menu = Air::get_modules();
 		// Set module
 		$module = isset($_GET['module'])?$_GET['module']:key($menu);
 		// Settings file path
@@ -231,7 +231,7 @@ class AirAdmin extends AirBase {
 			return;
 
 		// Get help tabs
-		$tabs = AirControl::get('help-tabs');
+		$tabs = Air::get('help-tabs');
 
 		if ( $tabs ) {
 			foreach ( $tabs as $key=>$value ) {
@@ -267,6 +267,3 @@ class AirAdmin extends AirBase {
 	}
 
 }
-
-//! Bootstrap admin library
-return new AirAdmin();
