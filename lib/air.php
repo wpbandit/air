@@ -130,7 +130,7 @@ class Air {
 		Bootstrap code
 			@public
 	**/
-	static function start() {
+	function start() {
 		// Prohibit multiple calls
 		if ( self::$vars )
 			return;
@@ -231,7 +231,7 @@ class Air {
 			return;
 
 		// Loop through widgets
-		foreach ( $widgets as $name=>$class ) {
+		foreach ( self::$config['widgets'] as $name=>$class ) {
 			require ( AIR_WIDGETS . '/' . $name . '.php' );
 			register_widget($class);
 		}
@@ -346,11 +346,6 @@ class Air {
 		}
 	}
 
-}
-
-//! Framework instance
-class AirInstance {
-
 	/**
 		Class constructor
 			@param $boot bool
@@ -358,10 +353,10 @@ class AirInstance {
 	**/
 	function __construct($boot=FALSE) {
 		if ( $boot )
-			Air::start();
+			$this->start();
 	}
 
 }
 
 //! Bootstrap framework
-return new AirInstance(TRUE);
+return new Air(TRUE);
