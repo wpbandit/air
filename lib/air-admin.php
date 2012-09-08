@@ -83,7 +83,7 @@ class AirAdmin extends Air {
 			return;
 
 		// Enqueue colorpicker stylesheet
-		if ( !in_array($hook, $this->hooks) ) {
+		if ( in_array($hook, $this->hooks) ) {
 			wp_enqueue_style('air-colorpicker', AIR_ASSETS . '/colorpicker.css',
 				FALSE, '1.1');
 		}
@@ -104,7 +104,7 @@ class AirAdmin extends Air {
 			return;
 
 		// Enqueue colorpicker script
-		if ( !in_array($hook, $this->hooks) ) {
+		if ( in_array($hook, $this->hooks) ) {
 			wp_enqueue_script('air-colorpicker', AIR_ASSETS . '/colorpicker.js',
 				array('jquery'), '1.1');
 		}
