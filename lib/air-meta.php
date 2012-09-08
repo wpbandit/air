@@ -37,7 +37,7 @@ class AirMeta extends Air {
 			if ( isset($fields) ) unset($fields);
 
 			// Load file
-			require ( AIR_PATH . '/theme/config/' . $file );
+			require ( AIR_THEME . '/config/' . $file );
 
 			// Add sections
 			foreach ( $sections as $section ) {
