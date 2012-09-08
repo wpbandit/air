@@ -327,7 +327,7 @@ class Air {
 			@public
 	**/
 	function action_register_scripts() {
-		if ( isset(self::$config['scripts']) )
+		if ( !isset(self::$config['scripts']) )
 			return;
 
 		// Defaults
