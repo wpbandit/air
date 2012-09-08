@@ -16,7 +16,7 @@
 **/
 
 //! Settings
-class AirMeta extends AirBase {
+class AirMeta extends Air {
 
 	//@{ Global variables
 	protected static

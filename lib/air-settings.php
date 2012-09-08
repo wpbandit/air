@@ -17,7 +17,7 @@
 **/
 
 //! AirSettings
-class AirSettings extends AirBase {
+class AirSettings {
 
 	//@{ Global variables
 	protected static

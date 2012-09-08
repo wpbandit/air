@@ -182,7 +182,7 @@ class AirAdmin extends Air {
 		// Set option name
 		AirSettings::set_option_name(Air::get('theme-options'));
 		// Define settings file
-		$settings_file = AIR_PATH . '/theme/config/settings-'.$section.'.php';
+		$settings_file = AIR_THEME . '/config/settings-'.$section.'.php';
 		// Load settings file, if exists
 		if ( is_file($settings_file) ) {
 			// Load settings and form library
@@ -252,7 +252,7 @@ class AirAdmin extends Air {
 	**/
 	function add_help_tab($screen, $tab) {
 		// Set help file
-		$file = AIR_PATH . '/theme/help/help-' . $tab['id'] . '.php';
+		$file = AIR_THEME . '/help/help-' . $tab['id'] . '.php';
 		// Load help file
 		if ( is_file($file) ) require ( $file );
 	}
@@ -267,3 +267,5 @@ class AirAdmin extends Air {
 	}
 
 }
+
+return new AirAdmin();

@@ -16,7 +16,7 @@
 **/
 
 //! AirValidate
-class AirValidate extends AirBase {
+class AirValidate extends Air {
 
 	protected static
 		$error = FALSE;
@@ -31,7 +31,7 @@ class AirValidate extends AirBase {
 		// Get current options
 		$valid = self::$options;
 		// Load section settings
-		require ( AIR_PATH . '/theme/config/settings-'.$section.'.php' );
+		require ( AIR_THEME . '/config/settings-'.$section.'.php' );
 		// Add settings fields
 		AirSettings::add_fields($fields);
 		// Validate theme options
