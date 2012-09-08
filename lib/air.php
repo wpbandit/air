@@ -227,7 +227,7 @@ class Air {
 			@public
 	**/
 	function register_widgets() {
-		if ( !self::$config['widgets'] )
+		if ( !isset(self::$config['widgets']) || !is_array(self::$config['widgets']) )
 			return;
 
 		// Loop through widgets
@@ -243,7 +243,7 @@ class Air {
 	**/
 	function register_sidebars() {
 		// Are sidebars configured ?
-		if ( !self::$config['sidebars'] || !is_array(self::$config['sidebars']) )
+		if ( !isset(self::$config['sidebars']) || !is_array(self::$config['sidebars']) )
 			return;
 
 		// Loop through sidebars
