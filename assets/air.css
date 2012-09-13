@@ -33,12 +33,16 @@ label { cursor: auto; }
 /*-------------------------------------------------------------------------- */
 /* Header
 /*-------------------------------------------------------------------------- */
-#air-header { background: #6d6d6d url(img/air-header.png) repeat-x top; color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,0.3); height: 66px; position: relative; border-bottom: 1px solid #444; border-right: 1px solid #555; border-left: 1px solid #555; 
+#air-header { background: #6d6d6d url(img/air-header.png) repeat-x top; color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,0.2); height: 60px; position: relative; border-bottom: 1px solid #175d7f;
 -moz-border-radius: 10px 10px 0 0; -webkit-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0; }
 
-#air-header a#wpbandit-logo { background: url(img/wpbandit-logo.png) no-repeat 0 0; width: 270px; height: 32px; position: absolute; top: 18px; left: 20px; overflow: hidden; text-indent: -999px; }
-#air-header #air-theme-version { font-weight: bold; font-size: 18px; position: absolute; right: 20px; top: 16px; }
-#air-header #air-air-version { color: #ccc; position: absolute; right: 20px; bottom: 12px; }
+#air-header a#wpbandit-logo { background: url(img/wpbandit-logo.png) no-repeat 0 0; width: 165px; height: 29px; position: absolute; top: 17px; left: 20px; overflow: hidden; text-indent: -999px; }
+#air-header ul { float: right; margin: 19px 0; padding: 0; }
+#air-header ul li { margin: 0; line-height: 22px; }
+#air-header ul li#air-theme-version { font-weight: bold; font-size: 18px; float: left; margin-right: 10px; }
+#air-header ul li#air-air-version { background: url(img/air-version.png) repeat-x top; color: #e0eff6; text-shadow: 0 -1px 0 rgba(0,0,0,0.2); float: left; padding: 0 10px; margin-right: 20px; 
+-moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px;
+-moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1); -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.1); box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
 
 
 /*-------------------------------------------------------------------------- */
@@ -58,7 +62,7 @@ ul#air-headmenu li.current a { background: #fff; border-bottom: 1px solid #fff; 
 /* Main
 /*-------------------------------------------------------------------------- */
 #air-content { background: url(img/air-sidebar.png) repeat-y 0 0; border-left: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; border-bottom: 1px solid #d8d8d8; 
--moz-border-radius: 0 0 10px 10px; -webkit-border-radius: 0 0 10px 10px; border-radius: 0 0 10px 10px; }
+-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px; }
 
 
 /*-------------------------------------------------------------------------- */

@@ -2,8 +2,10 @@
 
 	<div id="air-header">
 		<a id="wpbandit-logo" href="http://wpbandit.com" target="_blank">WPBandit</a>
-		<div id="air-theme-version"><?php air_theme_version(); ?></div>
-		<div id="air-air-version"><?php air_framework_version(); ?></div>
+		<ul>
+			<li id="air-theme-version"><?php air_theme_version(); ?></li>
+			<li id="air-air-version"><?php air_framework_version(); ?></li>
+		</ul>
 	</div><!--/air-header-->
 
 	<div id="air-content">
