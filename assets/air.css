@@ -40,7 +40,7 @@ label { cursor: auto; }
 #air-header ul { float: right; margin: 19px 0; padding: 0; }
 #air-header ul li { margin: 0; line-height: 22px; }
 #air-header ul li#air-theme-version { font-weight: bold; font-size: 18px; float: left; margin-right: 10px; }
-#air-header ul li#air-air-version { background: url(img/air-version.png) repeat-x top; color: #e0eff6; text-shadow: 0 -1px 0 rgba(0,0,0,0.2); float: left; padding: 0 10px; margin-right: 20px; 
+#air-header ul li#air-air-version { background: url(img/air-version.png) repeat-x top; color: #d0e7f2; text-shadow: 0 -1px 0 rgba(0,0,0,0.2); float: left; padding: 0 10px; margin-right: 20px; 
 -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px;
 -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1); -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.1); box-shadow: 0 1px 0 rgba(0,0,0,0.1); }
 
