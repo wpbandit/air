@@ -139,6 +139,9 @@ input.aligncenter { text-align: center; }
 .air-box-head h3 { font-size: 12px; padding: 8px 10px; border-bottom: 1px solid #dfdfdf; margin: 0; }
 .air-box-inner { padding: 10px; }
 .air-box label { display: block; width: 100%; }
+.air-box input[type="text"],
+.air-box select,
+.air-box textarea { background: #fff!important; }
 
 /* table */
 .air-table { width: 100%; border: 1px solid #dfdfdf; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
