@@ -27,7 +27,7 @@ label { cursor: auto; }
 #air-wrap input[type="text"],
 #air-wrap textarea,
 #air-wrap select,
-#air-wrap strong { color: #555; }
+#air-wrap strong { color: #555;  background: #f4f4f4; -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05); -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05); box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);  }
 
 
 /*-------------------------------------------------------------------------- */
