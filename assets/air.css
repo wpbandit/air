@@ -87,7 +87,6 @@ background-image: -webkit-gradient(linear, left bottom, left top, from(#6d6d6d),
 background-image: -webkit-linear-gradient(bottom, #6d6d6d, #808080); /* new Webkit */
 background-image: linear-gradient(bottom, #6d6d6d, #808080); /* proposed W3C Markup */ }
 
-
 /* top & default icons */
 i.air-icon { background: url(img/air-icons.png) no-repeat 0 0; width: 16px; height: 16px; float: left; margin-right: 6px; }
 i.air-icon.air-icon-changelog { background-position: 0 -16px; }
