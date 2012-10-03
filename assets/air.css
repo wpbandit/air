@@ -86,7 +86,6 @@ background-image: -o-linear-gradient(bottom, #6d6d6d, #808080); /* Opera */
 background-image: -webkit-gradient(linear, left bottom, left top, from(#6d6d6d), to(#808080)); /* old Webkit */
 background-image: -webkit-linear-gradient(bottom, #6d6d6d, #808080); /* new Webkit */
 background-image: linear-gradient(bottom, #6d6d6d, #808080); /* proposed W3C Markup */ }
-ul#air-menu li.air-menu-title { background: #e4e4e4; color: #999; text-shadow: 0 1px 0 #f5f5f5; font-size: 12px; line-height: 16px; padding: 8px 12px; border-top: 1px solid #f9f9f9; border-bottom: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; }
 
 /* top & default icons */
 i.air-icon { background: url(img/air-icons.png) no-repeat 0 0; width: 16px; height: 16px; float: left; margin-right: 6px; }
