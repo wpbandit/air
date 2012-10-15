@@ -128,7 +128,7 @@ function air_theme_options_menu() {
 			// Set current class ?
 			$output .= ($current === $key)?'<li class="current">':'<li>'; 
 			// Create menu item
-			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'</a></li>';
+			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'<span><i class="air-arrow"></i></span></a></li>';
 		}
 
 		// Print menu
@@ -154,7 +154,7 @@ function air_theme_modules_menu() {
 			// Set current class ?
 			$output .= ($current === $key)?'<li class="current">':'<li>'; 
 			// Create menu item
-			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'</a></li>';
+			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'<span><i class="air-arrow"></i></span></a></li>';
 		}
 
 		// Print menu

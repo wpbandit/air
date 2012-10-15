@@ -332,6 +332,44 @@ class AirMeta extends Air {
 			"height" => array(),
 			"width" => array()
 		);
+
+		// audio
+		$allowedposttags["audio"] = array(
+			"autoplay" => array(),
+			"controls" => array(),
+			"loop" => array(),
+			"preload" => array(),
+			"src" => array()
+		);
+
+		// video
+		$allowedposttags["video"] = array(
+			"autoplay" => array(),
+			"controls" => array(),
+			"height" => array(),
+			"loop" => array(),
+			"muted" => array(),
+			"poster" => array(),
+			"preload" => array(),
+			"src" => array(),
+			"width" => array()
+		);
+
+		// source
+		$allowedposttags["source"] = array(
+			"media" => array(),
+			"src" => array(),
+			"type" => array()
+		);
+
+		// track
+		$allowedposttags["track"] = array(
+			"default" => array(),
+			"kind" => array(),
+			"label" => array(),
+			"src" => array(),
+			"srclang" => array()
+		);
 	}
 
 	/**

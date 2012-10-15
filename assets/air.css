@@ -72,11 +72,11 @@ ul#air-headmenu li.current a { background: #fff; border-bottom: 1px solid #fff; 
 /*-------------------------------------------------------------------------- */
 /* Sidebar
 /*-------------------------------------------------------------------------- */
-#air-sidebar { background: #f1f1f1; width: 145px; float: left; }
+#air-sidebar { background: #f1f1f1; width: 145px; float: left; position: relative; z-index: 9; }
 
 ul#air-menu { font-family: Arial; font-weight: bold; text-shadow: 0 1px 0 #fff; margin: 0; }
 ul#air-menu li { list-style: none; margin: 0; }
-ul#air-menu li a { display: block; font-size: 13px; line-height: 16px; padding: 8px 8px; border-top: 1px solid #f9f9f9; border-bottom: 1px solid #dfdfdf; border-right: 1px solid #d8d8d8; }
+ul#air-menu li a { display: block; font-size: 13px; line-height: 16px; padding: 8px 8px; border-top: 1px solid #f9f9f9; border-bottom: 1px solid #dfdfdf; border-right: 1px solid #d8d8d8; position: relative; }
 ul#air-menu li a:hover { background: #e4e4e4; } 
 ul#air-menu li.current a { color: #fff; text-shadow: 0 -1px 0 #333; border-bottom-color: #6d6d6d; border-top-color: #808080; border-right-color: #555; margin-left: -1px; padding-left: 9px;
 background-color: #777; /* Fallback */
@@ -86,6 +86,31 @@ background-image: -o-linear-gradient(bottom, #6d6d6d, #808080); /* Opera */
 background-image: -webkit-gradient(linear, left bottom, left top, from(#6d6d6d), to(#808080)); /* old Webkit */
 background-image: -webkit-linear-gradient(bottom, #6d6d6d, #808080); /* new Webkit */
 background-image: linear-gradient(bottom, #6d6d6d, #808080); /* proposed W3C Markup */ }
+ul#air-menu li.current a span { position: absolute; right: 0; top: 0; }
+ul#air-menu li.current a span,
+ul#air-menu li.current a span i.air-arrow {
+background-color: #777; /* Fallback */
+background-image: -ms-linear-gradient(right bottom, #6d6d6d, #808080); /* IE10 */
+background-image: -moz-linear-gradient(right bottom, #6d6d6d, #808080); /* Firefox */
+background-image: -o-linear-gradient(right bottom, #6d6d6d, #808080); /* Opera */
+background-image: -webkit-gradient(linear, right bottom, left top, from(#6d6d6d), to(#808080)); /* old Webkit */
+background-image: -webkit-linear-gradient(right bottom, #6d6d6d, #808080); /* new Webkit */
+background-image: linear-gradient(right bottom, #6d6d6d, #808080); /* proposed W3C Markup */
+}
+
+ul#air-menu li.current a span i.air-arrow {
+	position: absolute;
+	top: 7px;
+	left: -7px;
+	width: 17px;
+	height: 17px;
+	display: block;
+	-moz-transform:    matrix( -0.6, 1, 0.6, 1, 0, 0 );
+	-webkit-transform: matrix( -0.6, 1, 0.6, 1, 0, 0 );
+	-o-transform:      matrix( -0.6, 1, 0.6, 1, 0, 0 );
+	-ms-transform:     matrix( -0.6, 1, 0.6, 1, 0, 0 );
+	transform:         matrix( -0.6, 1, 0.6, 1, 0, 0 );
+}
 
 /* top & default icons */
 i.air-icon { background: url(img/air-icons.png) no-repeat 0 0; width: 16px; height: 16px; float: left; margin-right: 6px; }
@@ -115,7 +140,7 @@ i.air-icon.air-icon-portfolio{ background-position: 0 -288px; }
 /*-------------------------------------------------------------------------- */
 /* Main
 /*-------------------------------------------------------------------------- */
-#air-main { width: 680px; float: left; min-height: 500px; padding-bottom: 60px; position: relative; 
+#air-main { width: 680px; float: left; min-height: 500px; padding-bottom: 60px; position: relative; z-index: 8;
 -moz-border-radius: 0 0 4px 0; -webkit-border-radius: 0 0 4px 0; border-radius: 0 0 4px 0;}
 #air-main-inner { padding: 0 20px 20px 20px; }
 
