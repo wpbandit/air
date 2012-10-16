@@ -27,9 +27,7 @@
 				</ul>
 			</div><!--/air-subheader-->
 
-			<div id="air-main-inner" class="air-text">
-				<div class="air-section">
-					<?php require ( AIR_MODULES . '/' . $module . '/' . $module.'-options-page.php' ); ?>
+			<?php require ( AIR_MODULES . '/' . $module . '/' . $module.'-options-page.php' ); ?>
 
 		</div><!--/air-main-->
 

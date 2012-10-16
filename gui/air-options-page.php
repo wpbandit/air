@@ -30,15 +30,13 @@
 
 			<form method="post" action="options.php">
 				<div id="air-main-inner" class="air-text">
-					<div class="air-section">
-						<?php if( 'changelog' !== $section): ?>
-							<?php settings_fields('air-settings'); ?>
-							<?php do_settings_sections('air-'.$section); ?>		
-							<input type="hidden" name="<?php echo Air::get('theme-options'); ?>[section]" value="<?php echo $section; ?>">
-						<?php else: ?>
-							<pre><?php require ( get_template_directory().'/changelog.txt' ); ?></pre>
-						<?php endif; ?>
-					</div>
+					<?php if( 'changelog' !== $section): ?>
+						<?php settings_fields('air-settings'); ?>
+						<?php do_settings_sections('air-'.$section); ?>		
+						<input type="hidden" name="<?php echo Air::get('theme-options'); ?>[section]" value="<?php echo $section; ?>">
+					<?php else: ?>
+						<pre><?php require ( get_template_directory().'/changelog.txt' ); ?></pre>
+					<?php endif; ?>
 					<div class="air-clear"></div>
 				</div><!--/air-main-inner-->
 			

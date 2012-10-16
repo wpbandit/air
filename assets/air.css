@@ -50,26 +50,6 @@ box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 1px 0 rgba(255,255,255,0.4)
 
 
 /*-------------------------------------------------------------------------- */
-/* Subheader
-/*-------------------------------------------------------------------------- */
-#air-subheader { background: #eaf2fa; text-shadow: 0 1px 0 #fff; height: 32px; border-top: 1px solid #d5e0ec; border-bottom: 1px solid #d5e0ec; }
-
-ul#air-headmenu { float: right; font-size: 12px; font-weight: bold; margin: 0; }
-ul#air-headmenu li { list-style: none; float: left; margin: 0; }
-ul#air-headmenu li a { color: #21759b; display: block; line-height: 16px; padding: 8px 12px; border-left: 1px solid #d5e0ec; 
--moz-box-shadow: inset 1px 0 0 #fff; -webkit-box-shadow: inset 1px 0 0 #fff; box-shadow: inset 1px 0 0 #fff; }
-ul#air-headmenu li a:hover { color: #21759b; text-decoration: underline; } 
-ul#air-headmenu li.current a { background: #fff; border-bottom: 1px solid #fff; }
-
-
-/*-------------------------------------------------------------------------- */
-/* Main
-/*-------------------------------------------------------------------------- */
-#air-content { background: url(img/air-sidebar.png) repeat-y 0 0; border-left: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; border-bottom: 1px solid #d8d8d8; 
--moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px; }
-
-
-/*-------------------------------------------------------------------------- */
 /* Sidebar
 /*-------------------------------------------------------------------------- */
 #air-sidebar { background: #f1f1f1; width: 145px; float: left; position: relative; z-index: 9; }
@@ -138,17 +118,30 @@ i.air-icon.air-icon-portfolio{ background-position: 0 -288px; }
 
 
 /*-------------------------------------------------------------------------- */
+/* Subheader
+/*-------------------------------------------------------------------------- */
+#air-subheader { background: #eaf2fa; text-shadow: 0 1px 0 #fff; height: 32px; border-top: 1px solid #d5e0ec; border-bottom: 1px solid #d5e0ec; }
+
+ul#air-headmenu { float: right; font-size: 12px; font-weight: bold; margin: 0; }
+ul#air-headmenu li { list-style: none; float: left; margin: 0; }
+ul#air-headmenu li a { color: #21759b; display: block; line-height: 16px; padding: 8px 12px; border-left: 1px solid #d5e0ec; 
+-moz-box-shadow: inset 1px 0 0 #fff; -webkit-box-shadow: inset 1px 0 0 #fff; box-shadow: inset 1px 0 0 #fff; }
+ul#air-headmenu li a:hover { color: #21759b; text-decoration: underline; } 
+ul#air-headmenu li.current a { background: #fff; border-bottom: 1px solid #fff; }
+
+
+/*-------------------------------------------------------------------------- */
 /* Main
 /*-------------------------------------------------------------------------- */
+#air-content { background: url(img/air-sidebar.png) repeat-y 0 0; border-left: 1px solid #d8d8d8; border-right: 1px solid #d8d8d8; border-bottom: 1px solid #d8d8d8; 
+-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px; }
+
 #air-main { width: 680px; float: left; min-height: 500px; padding-bottom: 60px; position: relative; z-index: 8;
 -moz-border-radius: 0 0 4px 0; -webkit-border-radius: 0 0 4px 0; border-radius: 0 0 4px 0;}
-#air-main-inner { padding: 0 20px 20px 20px; }
+#air-main-inner { padding: 0 20px 40px 20px; }
+#air-main-inner pre { padding: 10px 0; white-space: pre-wrap; word-wrap: break-word; overflow-x: auto; overflow-y: hidden; }  
 
-.air-module-container { padding: 20px 0; }
-.air-module-inner-container { clear: both; overflow: auto; }
-
-.air-section { margin-bottom: 20px; }
-.air-section pre { padding: 10px 0; white-space: pre-wrap; word-wrap: break-word; overflow-x: auto; overflow-y: hidden; }  
+.air-module { padding-top: 20px; }
 .air-submit { padding: 0; margin: 6px 0; }
 
 
@@ -179,6 +172,8 @@ input.aligncenter { text-align: center; }
 .air-box textarea { background: #fff!important; }
 
 /* table */
+.empty-message { border: 1px solid #dfdfdf; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; } 
+.empty-message p { padding: 0 10px; text-align: center; color: #999; }
 .air-table { width: 100%; border: 1px solid #dfdfdf; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 .air-table thead th { color: #444; padding: 8px 0; text-align: left; border-bottom: 1px solid #dfdfdf; }
 .air-table tr { padding: 10px 0; }
