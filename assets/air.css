@@ -75,22 +75,13 @@ background-image: -moz-linear-gradient(right bottom, #6d6d6d, #808080); /* Firef
 background-image: -o-linear-gradient(right bottom, #6d6d6d, #808080); /* Opera */
 background-image: -webkit-gradient(linear, right bottom, left top, from(#6d6d6d), to(#808080)); /* old Webkit */
 background-image: -webkit-linear-gradient(right bottom, #6d6d6d, #808080); /* new Webkit */
-background-image: linear-gradient(right bottom, #6d6d6d, #808080); /* proposed W3C Markup */
-}
-
-ul#air-menu li.current a span i.air-arrow {
-	position: absolute;
-	top: 7px;
-	left: -7px;
-	width: 17px;
-	height: 17px;
-	display: block;
-	-moz-transform:    matrix( -0.6, 1, 0.6, 1, 0, 0 );
-	-webkit-transform: matrix( -0.6, 1, 0.6, 1, 0, 0 );
-	-o-transform:      matrix( -0.6, 1, 0.6, 1, 0, 0 );
-	-ms-transform:     matrix( -0.6, 1, 0.6, 1, 0, 0 );
-	transform:         matrix( -0.6, 1, 0.6, 1, 0, 0 );
-}
+background-image: linear-gradient(right bottom, #6d6d6d, #808080); /* proposed W3C Markup */ }
+ul#air-menu li.current a span i.air-arrow { position: absolute; top: 7px; left: -7px; width: 17px; height: 17px; display: block;
+-moz-transform:    matrix( -0.6, 1, 0.6, 1, 0, 0 );
+-webkit-transform: matrix( -0.6, 1, 0.6, 1, 0, 0 );
+-o-transform:      matrix( -0.6, 1, 0.6, 1, 0, 0 );
+-ms-transform:     matrix( -0.6, 1, 0.6, 1, 0, 0 );
+transform:         matrix( -0.6, 1, 0.6, 1, 0, 0 ); }
 
 /* top & default icons */
 i.air-icon { background: url(img/air-icons.png) no-repeat 0 0; width: 16px; height: 16px; float: left; margin-right: 6px; }
