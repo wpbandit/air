@@ -217,8 +217,7 @@ class Air {
 		// Check page
 		if( !in_array(self::$vars['PAGENOW'],$pages) )
 			return;
-		// Load form and libraries
-		require ( AIR_PATH . '/lib/air-form.php' );
+		// Load meta library
 		require ( AIR_PATH . '/lib/air-meta.php' );
 	}
 
