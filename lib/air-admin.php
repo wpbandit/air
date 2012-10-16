@@ -48,10 +48,11 @@ class AirAdmin extends Air {
 			get_plugin_page_hook('more-themes','admin.php')
 		);
 
-		// Load settings and validation libraries
+		// Load settings, form, and validation libraries
 		if ( !class_exists('AirSettings') ) {
 			require ( AIR_PATH . '/lib/air-settings.php' );
 		}
+		require ( AIR_PATH . '/lib/air-form.php' );
 		require ( AIR_PATH . '/lib/air-validate.php' );
 
 		// Register settings
@@ -185,9 +186,8 @@ class AirAdmin extends Air {
 		$settings_file = AIR_THEME . '/config/settings-'.$section.'.php';
 		// Load settings file, if exists
 		if ( is_file($settings_file) ) {
-			// Load settings and form library
+			// Load settings
 			require ( $settings_file );
-			require ( AIR_PATH . '/lib/air-form.php' );
 			// Add sections - sections, tab
 			AirSettings::add_sections($sections, $section);
 			// Add settings fields
@@ -208,9 +208,8 @@ class AirAdmin extends Air {
 		$module_settings_file = AIR_MODULES . '/'. $module . '/' . $module . '-settings.php';
 		// Load and process module settings
 		if ( is_file($module_settings_file) ) {
-			// Load module settings and form library
+			// Load module settings
 			require ( $module_settings_file );
-			require ( AIR_PATH . '/lib/air-form.php' );
 			// Add sections - sections, tab
 			AirSettings::add_sections($sections, $module);
 			// Add settings fields
