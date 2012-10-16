@@ -182,7 +182,7 @@ input.aligncenter { text-align: center; }
 .air-table { width: 100%; border: 1px solid #dfdfdf; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 .air-table thead th { color: #444; padding: 8px 0; text-align: left; border-bottom: 1px solid #dfdfdf; }
 .air-table tr { padding: 10px 0; }
-.air-table td { background: #fcfcfc; border-bottom: 1px solid #eee; padding: 15px 0; vertical-align: top; }
+.air-table td { border-bottom: 1px solid #eee; padding: 15px 0; vertical-align: top; }
 .air-table a.air-link-move,
 .air-table a.air-link-delete { width: 28px; height: 28px; float: left; display: block; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 .air-table a.air-link-move:hover,
