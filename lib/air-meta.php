@@ -174,6 +174,10 @@ class AirMeta extends Air {
 					$output .= call_user_func_array($args['callback'],
 						array($args,$post->ID));
 					break;
+				// Category Dropdown
+				case 'category-dropdown':
+					$output .= self::field_category_dropdown($args,$post->ID);
+					break;
 				// Checkbox
 				case 'checkbox':
 					$output .= self::field_checkbox($args,$post->ID);
@@ -370,6 +374,30 @@ class AirMeta extends Air {
 			"src" => array(),
 			"srclang" => array()
 		);
+	}
+
+	/**
+		Category dropdown field
+			@return string
+			@param $args array
+			@private
+	**/
+	private static function field_category_dropdown($args) {
+		extract($args);
+		
+		// Set arguments
+		$args = array(
+			'show_option_all'	=> 'All',
+			'name'				=> $id,
+			'selected'			=> $value,
+			'hide_if_empty'		=> TRUE
+		);
+		
+		// Create dropdown
+		$field = wp_dropdown_categories( $args );
+		
+		// Return field
+		return $field;
 	}
 
 	/**
