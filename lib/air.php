@@ -169,6 +169,14 @@ class Air {
 		// Load framework functions
 		require ( AIR_PATH . '/lib/air-functions.php' );
 
+		// Set theme name
+		if ( !isset(self::$config['theme-name']) )
+			self::set('theme-name',wp_get_theme()->Name);
+
+		// Set theme version
+		if ( !isset(self::$config['theme-version']) )
+			self::set('theme-version',wp_get_theme()->Version);
+
 		// Set theme options name
 		if ( !isset(self::$config['theme-options']) )
 			self::$config['theme-options'] = 'air-options';
