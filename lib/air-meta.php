@@ -390,6 +390,7 @@ class AirMeta extends Air {
 			'show_option_all'	=> 'All',
 			'name'				=> $id,
 			'selected'			=> $value,
+			'echo'				=> 0,
 			'hide_if_empty'		=> TRUE
 		);
 		
