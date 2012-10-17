@@ -176,9 +176,11 @@ class Air {
 		// Get theme options
 		self::$options = get_option(self::$config['theme-options']);
 
-		// Admin library
-		if ( is_admin() )
+		// Admin and meta libraries
+		if ( is_admin() ) {
 			require ( AIR_PATH . '/lib/air-admin.php' );
+			require ( AIR_PATH . '/lib/air-meta.php' );
+		}
 
 		// Load Air modules
 		if ( self::get_modules() ) {
@@ -217,8 +219,11 @@ class Air {
 		// Check page
 		if( !in_array(self::$vars['PAGENOW'],$pages) )
 			return;
-		// Load meta library
-		require ( AIR_PATH . '/lib/air-meta.php' );
+		// Set files and folder
+		$files = Air::get('meta-files');
+		$folder = AIR_THEME . '/config';
+		// Initialize meta library
+		AirMeta::init($files,$folder);
 	}
 
 	/**

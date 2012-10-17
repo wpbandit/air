@@ -30,14 +30,14 @@ class AirMeta extends Air {
 		Initialize meta library
 			@public
 	**/
-	static function init() {
+	static function init($files,$folder) {
 		// Load and process meta configuration files
-		foreach ( Air::get('meta-files') as $file ) {
+		foreach ( $files as $file ) {
 			// Unset fields
 			if ( isset($fields) ) unset($fields);
 
 			// Load file
-			require ( AIR_THEME . '/config/' . $file );
+			require ( $folder . '/' . $file );
 
 			// Add sections
 			foreach ( $sections as $section ) {
@@ -542,6 +542,3 @@ class AirMeta extends Air {
 	}
 
 }
-
-//! Initialize meta library
-AirMeta::init();
