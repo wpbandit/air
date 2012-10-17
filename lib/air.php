@@ -171,11 +171,11 @@ class Air {
 
 		// Set theme name
 		if ( !isset(self::$config['theme-name']) )
-			self::set('theme-name',wp_get_theme()->Name);
+			self::$config['theme-name'] = wp_get_theme()->Name;
 
 		// Set theme version
 		if ( !isset(self::$config['theme-version']) )
-			self::set('theme-version',wp_get_theme()->Version);
+			self::$config['theme-version'] = wp_get_theme()->Version;
 
 		// Set theme options name
 		if ( !isset(self::$config['theme-options']) )
