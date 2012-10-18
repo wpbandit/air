@@ -169,6 +169,10 @@ class AirSettings {
 		
 		// Create field
 		switch ($type) {
+			// Category dropdown
+			case 'category-dropdown':
+				$output = self::field_category_dropdown($args);
+				break;
 			// Checkbox
 			case 'checkbox':
 				$output = self::field_checkbox($args);
@@ -204,6 +208,32 @@ class AirSettings {
 
 		// Print field
 		echo $output;
+	}
+
+	/**
+		Category dropdown field
+			@private
+	**/
+	private static function field_category_dropdown($args) {
+		extract($args);
+		// Get value
+		$value = self::get_option($id)?self::get_option($id):$std;
+		
+		// Set arguments
+		$args = array(
+			'show_option_all'	=> 'All',
+			'id'				=> 'air-'.$id,
+			'name'				=> $name,
+			'selected'			=> $value,
+			'echo'				=> 0,
+			'hide_if_empty'		=> TRUE
+		);
+		
+		// Create dropdown
+		$field = wp_dropdown_categories( $args );
+		
+		// Return field
+		return $field;
 	}
 
 	/**
