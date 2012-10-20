@@ -1,6 +1,7 @@
 /*-------------------------------------------------------------------------- */
 /* Common
 /*-------------------------------------------------------------------------- */
+#air-wrap a:active { outline: none; }
 .air-clear { clear: both; } 
 .form-table th, .form-wrap label { color: #777; }
 .form-table th { width: 150px; }
@@ -190,7 +191,7 @@ input.aligncenter { text-align: center; }
 /*-------------------------------------------------------------------------- */
 /* Footer
 /*-------------------------------------------------------------------------- */
-#air-footer { background: #fff url(img/air-footer.png) repeat-y right; width: 652px; height: 40px; padding: 10px 14px; border-top: 1px solid #f1f1f1; position: absolute; bottom: 0; 
+#air-footer { background: #fff url(img/air-footer.png) repeat-y right; width: 652px; padding: 10px 14px; border-top: 1px solid #f1f1f1; position: absolute; bottom: 0; 
 -moz-border-radius: 0 0 10px 0; -webkit-border-radius: 0 0 10px 0; border-radius: 0 0 10px 0; }
 #air-footer p { float: right; }
 
