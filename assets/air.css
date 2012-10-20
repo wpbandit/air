@@ -38,7 +38,7 @@ border-top: 1px solid #b5b5b5; border-bottom: 1px solid #999; border-left: 1px s
 -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0; }
 
 #air-header a#wpbandit-logo { background: url(img/wpbandit-logo.png) no-repeat 0 0; width: 165px; height: 28px; position: absolute; top: 17px; left: 20px; overflow: hidden; text-indent: -999px; }
-#air-header ul { float: right; margin: 0; padding: 17px 20px; }
+#air-header ul { position: absolute; top: 0; right: 0; margin: 0; padding: 17px 20px; }
 #air-header ul li { margin: 0; line-height: 22px; }
 #air-header ul li#air-theme-version { color: #666; line-height: 26px; font-weight: bold; font-size: 18px; float: left; margin-right: 16px; }
 #air-header ul li#air-air-version { line-height: 24px; background: url(img/air-version.png) repeat-x top; float: left; padding: 0 8px;
