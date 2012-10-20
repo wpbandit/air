@@ -432,7 +432,7 @@ class AirSettings {
 		// Loop through options menu
 		foreach ( Air::get_options_menu() as $key=>$value ) {
 			// Define settings file
-			$file = AIR_PATH .'/theme/config/' . 'settings-'.$key.'.php';
+			$file = AIR_THEME . '/config/' . 'settings-'.$key.'.php';
 			// Load settings file
 			if ( is_file($file) ) { require ( $file  ); }
 		}
