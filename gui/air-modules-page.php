@@ -11,7 +11,6 @@
 
 		<div id="air-sidebar">
 			<ul id="air-menu">
-				<li class="air-menu-title">Theme Modules</li>
 				<?php air_theme_modules_menu(); ?>
 			</ul>
 		</div><!--/air-sidebar-->
@@ -28,9 +27,7 @@
 				</ul>
 			</div><!--/air-subheader-->
 
-			<div id="air-main-inner" class="air-text">
-				<div class="air-section">
-					<?php require ( AIR_MODULES . '/' . $module . '/' . $module.'-options-page.php' ); ?>
+			<?php require ( AIR_MODULES . '/' . $module . '/' . $module.'-options-page.php' ); ?>
 
 		</div><!--/air-main-->
 

@@ -169,6 +169,14 @@ class Air {
 		// Load framework functions
 		require ( AIR_PATH . '/lib/air-functions.php' );
 
+		// Set theme name
+		if ( !isset(self::$config['theme-name']) )
+			self::$config['theme-name'] = wp_get_theme()->Name;
+
+		// Set theme version
+		if ( !isset(self::$config['theme-version']) )
+			self::$config['theme-version'] = wp_get_theme()->Version;
+
 		// Set theme options name
 		if ( !isset(self::$config['theme-options']) )
 			self::$config['theme-options'] = 'air-options';
@@ -176,9 +184,11 @@ class Air {
 		// Get theme options
 		self::$options = get_option(self::$config['theme-options']);
 
-		// Admin library
-		if ( is_admin() )
+		// Admin and meta libraries
+		if ( is_admin() ) {
 			require ( AIR_PATH . '/lib/air-admin.php' );
+			require ( AIR_PATH . '/lib/air-meta.php' );
+		}
 
 		// Load Air modules
 		if ( self::get_modules() ) {
@@ -217,9 +227,11 @@ class Air {
 		// Check page
 		if( !in_array(self::$vars['PAGENOW'],$pages) )
 			return;
-		// Load form and libraries
-		require ( AIR_PATH . '/lib/air-form.php' );
-		require ( AIR_PATH . '/lib/air-meta.php' );
+		// Set files and folder
+		$files = Air::get('meta-files');
+		$folder = AIR_THEME . '/config';
+		// Initialize meta library
+		AirMeta::init($files,$folder);
 	}
 
 	/**

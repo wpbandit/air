@@ -30,14 +30,14 @@ class AirMeta extends Air {
 		Initialize meta library
 			@public
 	**/
-	static function init() {
+	static function init($files,$folder) {
 		// Load and process meta configuration files
-		foreach ( Air::get('meta-files') as $file ) {
+		foreach ( $files as $file ) {
 			// Unset fields
 			if ( isset($fields) ) unset($fields);
 
 			// Load file
-			require ( AIR_THEME . '/config/' . $file );
+			require ( $folder . '/' . $file );
 
 			// Add sections
 			foreach ( $sections as $section ) {
@@ -173,6 +173,10 @@ class AirMeta extends Air {
 				case 'callback':
 					$output .= call_user_func_array($args['callback'],
 						array($args,$post->ID));
+					break;
+				// Category Dropdown
+				case 'category-dropdown':
+					$output .= self::field_category_dropdown($args,$post->ID);
 					break;
 				// Checkbox
 				case 'checkbox':
@@ -332,6 +336,69 @@ class AirMeta extends Air {
 			"height" => array(),
 			"width" => array()
 		);
+
+		// audio
+		$allowedposttags["audio"] = array(
+			"autoplay" => array(),
+			"controls" => array(),
+			"loop" => array(),
+			"preload" => array(),
+			"src" => array()
+		);
+
+		// video
+		$allowedposttags["video"] = array(
+			"autoplay" => array(),
+			"controls" => array(),
+			"height" => array(),
+			"loop" => array(),
+			"muted" => array(),
+			"poster" => array(),
+			"preload" => array(),
+			"src" => array(),
+			"width" => array()
+		);
+
+		// source
+		$allowedposttags["source"] = array(
+			"media" => array(),
+			"src" => array(),
+			"type" => array()
+		);
+
+		// track
+		$allowedposttags["track"] = array(
+			"default" => array(),
+			"kind" => array(),
+			"label" => array(),
+			"src" => array(),
+			"srclang" => array()
+		);
+	}
+
+	/**
+		Category dropdown field
+			@return string
+			@param $args array
+			@private
+	**/
+	private static function field_category_dropdown($args) {
+		extract($args);
+		
+		// Set arguments
+		$args = array(
+			'show_option_all'	=> 'All',
+			'name'				=> $id,
+			'selected'			=> $value,
+			'echo'				=> 0,
+			'hide_if_empty'		=> TRUE
+		);
+		
+		// Create dropdown
+		$field = wp_dropdown_categories( $args );
+		
+		// Return field
+		return $field;
 	}
 
 	/**
@@ -504,6 +571,3 @@ class AirMeta extends Air {
 	}
 
 }
-
-//! Initialize meta library
-AirMeta::init();

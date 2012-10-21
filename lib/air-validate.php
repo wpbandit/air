@@ -78,6 +78,11 @@ class AirValidate extends Air {
 			// Switch to field type
 			switch ( $field['type'] ) {
 				
+				// Validate category dropdown
+				case 'category-dropdown':
+					$valid[$field['id']] = esc_attr($input[$field['id']]);
+					break;
+
 				// Validate checkbox field
 				case 'checkbox':
 					foreach ($field['choices'] as $id=>$value ) {
@@ -136,12 +141,17 @@ class AirValidate extends Air {
 		// Loop through fields
 		foreach ( AirSettings::get_settings() as $field ) {
 			// Set default values for non-checkbox fields
-			if ( $field['type'] != 'checkbox' ) {
+			if ( !in_array($field['type'], array('category-dropdown','checkbox')) ) {
 				if ( isset($field['default']) ) {
 					$valid[$field['id']] = $field['default'];
 				} else {
 					$valid[$field['id']] = '';
 				}
+			}
+
+			// Set default values for category dropdown fields
+			if ( $field['type'] == 'category-dropdown' ) {
+				$valid[$field['id']] = '0';
 			}
 
 			// Set default values for checkbox fields

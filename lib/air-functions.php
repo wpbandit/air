@@ -128,7 +128,7 @@ function air_theme_options_menu() {
 			// Set current class ?
 			$output .= ($current === $key)?'<li class="current">':'<li>'; 
 			// Create menu item
-			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'</a></li>';
+			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'<span><i class="air-arrow"></i></span></a></li>';
 		}
 
 		// Print menu
@@ -154,7 +154,7 @@ function air_theme_modules_menu() {
 			// Set current class ?
 			$output .= ($current === $key)?'<li class="current">':'<li>'; 
 			// Create menu item
-			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'</a></li>';
+			$output .= '<a href="'.$url.'"><i class="air-icon air-icon-'.$key.'"></i>'.$value.'<span><i class="air-arrow"></i></span></a></li>';
 		}
 
 		// Print menu
@@ -174,7 +174,7 @@ function air_settings_saved_notice() {
 }
 
 /**
-	Get theme styles
+	Theme styles
 	- Populate theme styles into an array
 **/
 function air_get_theme_styles() {
@@ -206,4 +206,46 @@ function air_get_theme_styles() {
 
 	// Return styles
 	return isset($styles)?$styles:$default;
+}
+
+/**
+	Single post templates
+	- Populate single post templates into an array
+**/
+function air_get_post_templates() {
+	// Template directory
+	$template_dir = get_template_directory();
+
+	// Default style
+	$default = array( '0'=>'Default' );
+
+	// Loop through styles
+	if ( $handle = opendir($template_dir) ) {
+		while ( false !== ($file = readdir($handle)) ) {
+			// Check that object is file
+			if ( $file != "." && $file != ".." &&
+					is_file($template_dir.'/'.$file) ) {
+				// Limit to single template
+				if ( substr($file,0,7) === 'single-' ) {
+					$tmp = new \SplFileObject($template_dir.'/'.$file);
+					$tmp->seek(2);
+					// Check for template name
+					if ( strpos($tmp->current(),'Template Name') !== false ) {
+						$name = substr(esc_html($tmp->current()), 15);
+						$templates[$file] = $name;
+					}
+				}
+			}
+		}
+		closedir($handle);
+
+		// Combine arrays
+		if ( isset($templates) ) {
+			asort($templates);
+			$templates = $default + $templates;
+		}
+	}
+
+	// Return templates
+	return isset($templates)?$templates:$default;
 }
