@@ -12,7 +12,7 @@
 	Jermaine Marée
 
 		@package AirForm
-		@version 1.1
+		@version 1.2
 **/
 
 //! Creates form fields
@@ -21,86 +21,86 @@ class AirForm {
 	/**
 		Button
 			@return string
-			@param $attrs array
+			@param $atts array
 			@public
 	**/
-	static function button(array $attrs) {
+	static function button(array $atts) {
 		// Default attributes
 		$defaults = array(
 			'type'	=> 'button',
 			'value'	=> __('Save Changes','air')
 		);
 
-		// Parse attributes and merge with $defaults
-		$attrs = wp_parse_args($attrs,$defaults);
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
 
 		// Create field
-		return '<input'.air_attrs($attrs).'/>';
+		return '<input'.air_attrs($atts).'/>';
 	}
 
 	/**
 		Checkbox
 			@return string
-			@param $attrs array
+			@param $atts array
 			@param $value string
 			@param $std string
 			@public
 	**/
-	static function checkbox(array $attrs,$value,$std='1') {
+	static function checkbox(array $atts,$value,$std='1') {
 		// Default attributes
 		$defaults = array(
 			'name'	=> '',
 			'type'	=> 'checkbox',
 			'value'	=> $std
 		);
-		// Parse args
-		$attrs = wp_parse_args($attrs,$defaults);
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
 		// Checked ?
-		if ( $std==$value ) { $attrs['checked'] = 'checked'; }
+		if ( $std==$value ) { $atts['checked'] = 'checked'; }
 		// Create field
-		$field = '<input'.air_attrs($attrs).'/>';
+		$field = '<input'.air_attrs($atts).'/>';
 		return $field;
 	}
 
 	/**
 		Radio
 			@return string
-			@param $attrs array
+			@param $atts array
 			@param $value string
 			@param $selected string
 			@public
 	**/
-	static function radio(array $attrs,$value,$selected) {
+	static function radio(array $atts,$value,$selected) {
 		// Default attributes
 		$defaults = array(
 			'name'	=> '',
 			'type'	=> 'radio',
 			'value'	=> $value
 		);
-		// Parse args
-		$attrs = wp_parse_args($attrs,$defaults);
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
 		// Checked ?
-		if ( $selected == $value ) { $attrs['checked'] = 'checked'; }
+		if ( $selected == $value ) { $atts['checked'] = 'checked'; }
 		// Create field
-		$field = '<input' . air_attrs($attrs) . '/>';
+		$field = '<input' . air_attrs($atts) . '/>';
 		return $field;
 	}
 
 	/**
 		Select
 			@return string
-			@param $attrs array
+			@param $atts array
 			@param $value string
 			@param $options array
 			@public
 	**/
-	static function select(array $attrs,$value,array $options) {
+	static function select(array $atts,$value,array $options) {
 		// Default attributes
 		$defaults = array('name'=>'');
 		// Parse args
-		$attrs = wp_parse_args($attrs,$defaults);
+		$atts = wp_parse_args($atts,$defaults);
 		// Create field
-		$field = '<select' . air_attrs($attrs) . '>';
+		$field = '<select' . air_attrs($atts) . '>';
 		// Build options
 		foreach ( $options as $ovalue=>$oname ) {
 			// Option attributes
@@ -118,38 +118,154 @@ class AirForm {
 	/**
 		Text
 			@return string
-			@param $attrs array
+			@param $atts array
 			@param $value string
 			@public
 	**/
-	static function text(array $attrs,$value='') {
+	static function text(array $atts,$value='') {
 		// Default attributes
 		$defaults = array(
 			'name'	=> '',
 			'type'	=> 'text',
 			'value'	=> $value
 		);
-		// Parse args
-		$attrs = wp_parse_args($attrs,$defaults);
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
 		// Create field
-		$field = '<input' . air_attrs($attrs) . '/>';
+		$field = '<input' . air_attrs($atts) . '/>';
 		return $field;
 	}
 
 	/**
 		Textarea
 			@return string
-			@param $attrs array
+			@param $atts array
 			@param $value string
 			@public
 	**/
-	static function textarea(array $attrs,$value='') {
+	static function textarea(array $atts,$value='') {
 		// Default attributes
 		$defaults = array('name'=>'');
-		// Parse args
-		$attrs = wp_parse_args($attrs,$defaults);
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
 		// Create field
-		$field = '<textarea' . air_attrs($attrs) . '>' . $value . '</textarea>';
+		$field = '<textarea' . air_attrs($atts) . '>' . $value . '</textarea>';
+		return $field;
+	}
+
+
+
+
+	/*-----------------------------------------------------------------------*/
+	/* WIDGET FIELDS
+	/*-----------------------------------------------------------------------*/
+
+
+	/**
+		Category dropdown field
+			@return string
+			@param $args array
+			@private
+	**/
+	static function widget_category_dropdown(array $atts,$value='',$label) {
+		// Default attributes
+		$defaults = array(
+			'id'	=> '',
+			'name'	=> ''
+		);
+
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
+
+		// Set arguments
+		$args = array(
+			'show_option_all'	=> 'All',
+			'name'				=> $atts['name'],
+			'class'				=> 'widefat',
+			'selected'			=> $value,
+			'echo'				=> 0,
+			'hide_if_empty'		=> TRUE
+		);
+		
+		// Build field
+		$field  = '<p><label for="'.$atts['id'].'">'.$label.'</label>';
+		$field .= wp_dropdown_categories($args).'</p>';
+		
+		// Return field
+		return $field;
+	}
+
+	/**
+		Widget checkbox field
+			@return string
+			@public
+	**/
+	static function widget_checkbox(array $atts,$value='',$label,$before='<p>',$after='</p>') {
+		// Default attributes
+		$defaults = array(
+			'id'	=> '',
+			'type'	=> 'checkbox',
+			'class'	=> 'checkbox'
+		);
+
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
+
+		// Build text field
+		$field  = $before.self::checkbox($atts,$value);
+		$field .= ' <label for="'.$atts['id'].'">'.$label.'</label>'.$after;
+		
+		// Return field
+		return $field;
+	}
+
+	/**
+		Widget select field
+			@public
+	**/
+	static function widget_select(array $atts,$value='',$opts,$label,$before='<p>',$after='</p>') {
+		// Default attributes
+		$defaults = array(
+			'id'	=> '',
+			'class'	=> 'widefat',
+		);
+
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
+
+		// Build dropdown
+		$field  = $before.'<label for="'.$atts['id'].'">'.$label.'</label>';
+		$field .= self::select($atts,$value,$opts).$after;
+
+		// Return field
+		return $field;
+	}
+
+	/**
+		Widget text field
+			@return string
+			@param $atts array
+			@param $value string
+			@param $label string
+			@public
+	**/
+	static function widget_text(array $atts,$value='',$label,$before='<p>',$after='</p>') {
+		// Default attributes
+		$defaults = array(
+			'id'	=> '',
+			'type'	=> 'text',
+			'class'	=> 'widefat',
+			'value' => $value
+		);
+
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
+		
+		// Build text field
+		$field  = $before.'<label for="'.$atts['id'].'">'.$label.'</label>';
+		$field .= self::text($atts).$after;
+		
+		// Return field
 		return $field;
 	}
 
