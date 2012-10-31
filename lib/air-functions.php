@@ -17,6 +17,15 @@ function air_attrs(array $attrs) {
 }
 
 /**
+	Creates range, removing first key
+**/
+function air_range($start,$stop,$step=1) {
+	$range = range($start,$stop,$step);
+	unset($range[0]);
+	return $range;
+}
+
+/**
 	Air framework version
 	- Displays framework name and version
 **/
