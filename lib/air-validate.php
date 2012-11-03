@@ -141,7 +141,7 @@ class AirValidate extends Air {
 		// Loop through fields
 		foreach ( AirSettings::get_settings() as $field ) {
 			// Set default values for non-checkbox fields
-			if ( !in_array($field['type'], array('category-dropdown','checkbox')) ) {
+			if ( !in_array($field['type'], array('category-dropdown','checkbox','radio')) ) {
 				if ( isset($field['default']) ) {
 					$valid[$field['id']] = $field['default'];
 				} else {
@@ -161,6 +161,18 @@ class AirValidate extends Air {
 						$valid[$key] = $field['default'][$key];
 					} else {
 						$valid[$key] = '0';
+					}
+				}
+			}
+
+			// Set default values for radio fields
+			if ( $field['type'] == 'radio' ) {
+				$array_key = key($field['choices']);
+				foreach ( $field['choices'] as $key=>$value ) {
+					if ( isset($field['default'][$key]) ) {
+						$valid[$field['id']] = $field['default'];
+					} else {
+						$valid[$field['id']] = (string)$array_key;
 					}
 				}
 			}

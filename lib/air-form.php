@@ -79,8 +79,9 @@ class AirForm {
 		);
 		// Parse $atts and merge with $defaults
 		$atts = wp_parse_args($atts,$defaults);
+
 		// Checked ?
-		if ( $selected == $value ) { $atts['checked'] = 'checked'; }
+		if ( (string)$selected === (string)$value ) { $atts['checked'] = 'checked'; }
 		// Create field
 		$field = '<input' . air_attrs($atts) . '/>';
 		return $field;

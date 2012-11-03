@@ -324,10 +324,13 @@ class AirSettings {
 		$field = '';
 
 		// Get selected value
-		$selected = self::get_option($id)?self::get_option($id):$std;
+		$selected = self::get_option($id);
+
+		if ( !$selected && ($selected !== '0') )
+			$selected = $std;
 
 		// Set default
-		if(!$selected) { $selected = key($choices); }
+		if ( !$selected ) $selected = key($choices);
 
 		foreach($choices as $key=>$label) {
 			// Set attributes
