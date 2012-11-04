@@ -169,7 +169,7 @@ class AirValidate extends Air {
 			if ( $field['type'] == 'radio' ) {
 				$array_key = key($field['choices']);
 				foreach ( $field['choices'] as $key=>$value ) {
-					if ( isset($field['default'][$key]) ) {
+					if ( isset($field['default']) ) {
 						$valid[$field['id']] = $field['default'];
 					} else {
 						$valid[$field['id']] = (string)$array_key;
