@@ -198,7 +198,7 @@ function air_get_theme_styles() {
 		while ( false !== ($file = readdir($handle)) ) {
 			if ( $file != "." && $file != ".." &&
 					is_file($styles_dir.'/'.$file) ) {
-				$tmp = new \SplFileObject($styles_dir.'/'.$file);
+				$tmp = new SplFileObject($styles_dir.'/'.$file);
 				$tmp->seek(1);
 				$name = substr(esc_html($tmp->current()), 7);
 				$styles[$file] = $name;
@@ -236,7 +236,7 @@ function air_get_post_templates() {
 					is_file($template_dir.'/'.$file) ) {
 				// Limit to single template
 				if ( substr($file,0,7) === 'single-' ) {
-					$tmp = new \SplFileObject($template_dir.'/'.$file);
+					$tmp = new SplFileObject($template_dir.'/'.$file);
 					$tmp->seek(2);
 					// Check for template name
 					if ( strpos($tmp->current(),'Template Name') !== false ) {
