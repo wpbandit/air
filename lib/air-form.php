@@ -270,4 +270,27 @@ class AirForm {
 		return $field;
 	}
 
+	/**
+		Widget textarea field
+			@return string
+			@param $atts array
+			@param $value string
+			@param $label string
+			@public
+	**/
+	static function widget_textarea( array $atts,$value='',$label,$before='<p>',$after='</p>') {
+		// Default attributes
+		$defaults = array('name'=>'');
+
+		// Parse $atts and merge with $defaults
+		$atts = wp_parse_args($atts,$defaults);
+		
+		// Create field
+		$field  = $before.'<label for="'.$atts['id'].'">'.$label.'</label>';
+		$field .= self::textarea($atts,$value).$after;
+
+		// Return field
+		return $field;
+	}
+
 }
