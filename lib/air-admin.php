@@ -125,15 +125,32 @@ class AirAdmin extends Air {
 		$icon_url = AIR_ASSETS . '/img/wpbandit.png';
 
 		// Create top-level menu
-		add_menu_page($title, $title, 'manage_options', 'theme-options',
-			array($this, 'options_page'), $icon_url);
+		if ( isset(self::$options_menu) ) {
 
-		// Theme options menu
-		add_submenu_page('theme-options', 'Theme Options', 'Theme Options',
-			'manage_options', 'theme-options', array($this, 'options_page'));
+			// Create top-level menu (Theme Options)
+			add_menu_page($title, $title, 'manage_options', 'theme-options',
+				array($this, 'options_page'), $icon_url);
+
+			// Theme options menu
+			add_submenu_page('theme-options', 'Theme Options', 'Theme Options',
+				'manage_options', 'theme-options', array($this, 'options_page'));
+
+		} elseif ( isset(self::$modules) ) {
+
+			// Create top-level menu (Theme Modules)
+			add_menu_page($title, $title, 'manage_options', 'theme-modules',
+				array($this, 'options_page'), $icon_url);
+
+			// Theme modules menus
+			add_submenu_page('theme-options', 'Theme Modules', 'Theme Modules',
+				'manage_options', 'theme-modules', array($this, 'modules_page'));
+
+		}
+
 		// Theme modules menu
-		add_submenu_page('theme-options', 'Theme Modules', 'Theme Modules',
-			'manage_options', 'theme-modules', array($this, 'modules_page'));
+		if ( isset(self::$modules) && isset(self::$options_menu) )
+			add_submenu_page('theme-options', 'Theme Modules', 'Theme Modules',
+				'manage_options', 'theme-modules', array($this, 'modules_page'));
 	}
 
 	/**
